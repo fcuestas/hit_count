@@ -1,0 +1,24 @@
+version: "3.5"
+services:
+  web-fe:
+    image: "counter-app_web-fe"
+    ports:
+      - target: 5000
+        published: 5000
+    networks:
+      - counter-net
+    volumes:
+      - type: volume
+        source: counter-vol
+        target: /code
+    replicas: 4
+  redis:
+    image: "redis:alpine"
+    networks:
+      counter-net:
+
+networks:
+  counter-net:
+
+volumes:
+  counter-vol:
